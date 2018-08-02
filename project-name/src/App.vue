@@ -13,6 +13,7 @@
 import Vue from "vue";
 import Index from '@/components/index/index';
 import Vant from 'vant';
+import {api,key} from '@/https/https.js';
 
 Vue.use(Vant);
 export default {
@@ -23,10 +24,11 @@ export default {
     }
   },
   created() {
+    console.log(11);
     let that = this;
-      that.$axios.get("http://119.23.132.106:97/api/wx/GetCateringShopUserModuleConfigdetailInfo",{
+      that.$axios.get(api + "/wx/GetCateringShopUserModuleConfigdetailInfo",{
           params:{
-              "key":'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1MTYwNDA2NiIsImlhdCI6MTUzMjkxODIyNSwianRpIjpmYWxzZSwib3BlbmlkIjoib2xMQzA1RE5tQmNIVzNqMEQyYU1ES090bXR3WSIsIm1lbWJlcmlkIjoiMzU2Nzc3ODYwIiwic3Zfc2hvcF91c2VyX2lkIjo4NDc2MX0.wPnuT_iwFzABVjBbdVNFTHmwXBy3wVD4Xxvn3WtUn3Q'
+              "key": key
           }
       }).then(function(res){
           console.log(res);
@@ -51,7 +53,10 @@ export default {
 .router-fade-enter-active, .router-fade-leave-active {
 	  	transition: opacity .3s;
 	}
-	.router-fade-enter, .router-fade-leave-active {
-	  	opacity: 0;
-	}
+.router-fade-enter, .router-fade-leave-active {
+    opacity: 0;
+}
+a:focus,a:hover{
+  text-decoration: none;
+}
 </style>

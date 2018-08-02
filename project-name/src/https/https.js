@@ -1,0 +1,4 @@
+//服务器的地址，token值
+export const api = 'http://119.23.132.106:97/api';
+export const key = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1MTYwNDA2NiIsImlhdCI6MTUzMjkxODIyNSwianRpIjpmYWxzZSwib3BlbmlkIjoib2xMQzA1RE5tQmNIVzNqMEQyYU1ES090bXR3WSIsIm1lbWJlcmlkIjoiMzU2Nzc3ODYwIiwic3Zfc2hvcF91c2VyX2lkIjo4NDc2MX0.wPnuT_iwFzABVjBbdVNFTHmwXBy3wVD4Xxvn3WtUn3Q';
+

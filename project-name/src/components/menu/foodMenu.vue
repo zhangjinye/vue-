@@ -3,21 +3,32 @@
         <div class="content">
             <!-- 搜索 -->
             <div class="search">
-                <van-search
-                    v-model="value"
-                    show-action
-                    @search="onSearch"
-                    placeholder="输入商品名称"
-                    >
-                    <div slot="action" @click="onSearch">搜索</div>
-                </van-search>
+                <!-- 搜索栏 -->
+                <van-nav-bar
+                title="点菜"
+                left-text="返回"
+                :right-text="showSearch ? '关闭搜索':'搜索菜品'"
+                left-arrow
+                @click-left="onClickLeft"
+                @click-right="onClickRight"
+                />
+                <div class="search-box" v-show="showSearch">
+                    <van-search
+                        v-model="value"
+                        show-action
+                        @search="onSearch"
+                        placeholder="输入您想要查找的菜品哦~"
+                        >
+                        <div slot="action" @click="onSearch">搜索</div>
+                    </van-search>
+                </div>
             </div>
             <!-- 菜单 -->
             <div class="menu-content">
-                <div class="listMenu">
+                <div class="listMenu" :class="showSearch ? 'listMenupaddingtop':''">
                     <menu-list></menu-list>
                 </div>
-                <div class="foodlist">
+                <div class="foodlist" :class="showSearch ? 'foodlistPaddingtop':''">
                     <div class="food-menu-name">海鲜</div>
                     <food-list></food-list>
                 </div>
@@ -42,10 +53,15 @@
 <script>
 import menuList from '@/components/menuList/menuList';
 import foodList from '@/components/foodList/foodList';
+import {api,key} from '@/https/https.js';
 export default {
+    created() {
+        this.getProductCategoryList();
+    },
     data(){
         return{
-            value: ""
+            value: "",
+            showSearch: false
         }
     },
     components:{
@@ -55,6 +71,26 @@ export default {
     methods: {
         onSearch(){
             
+        },
+        //返回
+        onClickLeft() {
+            let that = this;
+            that.$router.push("/index");
+        },
+        //搜索
+        onClickRight() {
+            this.showSearch = !this.showSearch;
+        },
+        //获取菜品分类列表
+        getProductCategoryList(){
+            let that = this;
+            that.$axios.get( api+ "/wx/GetProductCategoryList",{
+                params:{
+                    "key":key
+                }
+            }).then(function(res){
+                console.log(res);
+            })
         },
     }
 }
@@ -93,8 +129,11 @@ export default {
     height: 100%;
     overflow-y: auto;
     .van-badge-group{
-        padding-bottom: 2.666667rem;
+        padding-bottom: 3.666667rem;
     }
+}
+.listMenupaddingtop{
+    padding-top: 2.226667rem;
 }
 .foodlist{
     flex: 1;
@@ -106,6 +145,9 @@ export default {
         font-size: @fontSize14;
         padding: .266667rem 0;
     }
+}
+.foodlistPaddingtop{
+    padding-top: 2.226667rem;
 }
 .cart{
     width: 100%;

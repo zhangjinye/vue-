@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
-import routes from './router/index'
+import routes from './router'
 import axios  from 'axios'
 //将axios挂载到vue中
 Vue.prototype.$axios = axios;
